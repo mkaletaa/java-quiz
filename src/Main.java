@@ -11,6 +11,6 @@ public class Main{
 }
 
 //TODO: przycisk nowej gry, dodać drugi tryb, może pytania i odpowiedzi brać z pliku .txt,
-// dodać losowość wyświetlania pytań, zapis wyników
+// dodać losowość wyświetlania pytań, zapis wyników, ostylować wszystko
 
 

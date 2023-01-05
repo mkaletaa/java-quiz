@@ -3,6 +3,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Collections;
 import java.util.Timer;
@@ -27,7 +28,7 @@ public class MyPanel extends JPanel {
         questionNr = 0;
         Questions questions = new Questions();
 
-        for (int i = 0; i <= questions.getQuestions().size(); i++) {
+        for (int i = 0; i < questions.getQuestions().size(); i++) {
             qnr.add(i);
         }
         Collections.shuffle(qnr);
@@ -77,6 +78,11 @@ public class MyPanel extends JPanel {
                 buttonC.setBackground(null);
                 buttonD.setBackground(null);
 
+                buttonA.setEnabled(true);
+                buttonB.setEnabled(true);
+                buttonC.setEnabled(true);
+                buttonD.setEnabled(true);
+
                 }
             }, 2000); // wywołanie po 2 sekundach
 
@@ -85,17 +91,30 @@ public class MyPanel extends JPanel {
     }
 
     private void newQuestion(Questions questions){
-        questionLabel.setText(""+(questionNr+1)+". "+questions.getQuestion(questionNr));
-        buttonA.setText(questions.getAnswers1().get(questionNr));
-        buttonB.setText(questions.getAnswers2().get(questionNr));
-        buttonC.setText(questions.getAnswers3().get(questionNr));
-        buttonD.setText(questions.getAnswers4().get(questionNr));
+        List<String> ans = new ArrayList<>();
+        ans.add(questions.getAnswers1().get(qnr.get(questionNr)));
+        ans.add(questions.getAnswers2().get(qnr.get(questionNr)));
+        ans.add(questions.getAnswers3().get(qnr.get(questionNr)));
+        ans.add(questions.getAnswers4().get(qnr.get(questionNr)));
+
+        Collections.shuffle(ans);
+
+        questionLabel.setText(""+(questionNr+1)+". "+questions.getQuestion(qnr.get(questionNr)));
+        buttonA.setText(ans.get(0));
+        buttonB.setText(ans.get(1));
+        buttonC.setText(ans.get(2));
+        buttonD.setText(ans.get(3));
         questionNr ++;
     }
 
     private void answerCheck(Questions questions, String answer, String btn){
+        buttonA.setEnabled(false);
+        buttonB.setEnabled(false);
+        buttonC.setEnabled(false);
+        buttonD.setEnabled(false);
+
         if(questionNr!=0){
-            if(answer.equals(questions.getCorrectAnswers().get(questionNr-1))) {
+            if(answer.equals(questions.getCorrectAnswers().get(qnr.get(questionNr-1)))) {
                 points++;
                 pointsLabel.setText("score: " + points);
 
@@ -107,13 +126,13 @@ public class MyPanel extends JPanel {
                 }
             }else {
 
-                if(buttonA.getText().equals(questions.getCorrectAnswers().get(questionNr-1)))
+                if(buttonA.getText().equals(questions.getCorrectAnswers().get(qnr.get(questionNr-1))))
                     buttonA.setBackground(new Color(0, 255, 0));
-                if(buttonB.getText().equals(questions.getCorrectAnswers().get(questionNr-1)))
+                if(buttonB.getText().equals(questions.getCorrectAnswers().get(qnr.get(questionNr-1))))
                     buttonB.setBackground(new Color(0, 255, 0));
-                if(buttonC.getText().equals(questions.getCorrectAnswers().get(questionNr-1)))
+                if(buttonC.getText().equals(questions.getCorrectAnswers().get(qnr.get(questionNr-1))))
                     buttonC.setBackground(new Color(0, 255, 0));
-                if(buttonD.getText().equals(questions.getCorrectAnswers().get(questionNr-1)))
+                if(buttonD.getText().equals(questions.getCorrectAnswers().get(qnr.get(questionNr-1))))
                     buttonD.setBackground(new Color(0, 255, 0));
 
                 switch (btn) {
