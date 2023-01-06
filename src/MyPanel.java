@@ -1,3 +1,5 @@
+import questions.*;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,7 +17,8 @@ public class MyPanel extends JPanel {
 
     private List<Integer> qnr = new ArrayList<>();
     private int questionNr;
-    public MyPanel() {
+    private Questions questions;
+    public MyPanel(String cat) {
         points = 0;
         questionLabel = new JLabel("" + questionNr);
         pointsLabel = new JLabel("wynik: " + points);
@@ -25,7 +28,14 @@ public class MyPanel extends JPanel {
         buttonD = new JButton("");
 
         questionNr = 0;
-        Questions questions = new Questions();
+
+        switch(cat){
+            case "maths" ->  questions = new Maths();
+            case "geography" -> questions = new Geography();
+            case "animals" -> questions = new Animals();
+            case "history" -> questions = new History();
+        }
+
 
         for (int i = 0; i < questions.getQuestions().size(); i++) {
             qnr.add(i);
