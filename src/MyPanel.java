@@ -141,8 +141,13 @@ public class MyPanel extends JPanel {
         });
     }
 
-    // Metoda do załadowania nowego pytania
+// Metoda do załadowania nowego pytania
     private void loadNewQuestion(Questions questions) {
+        if (shuffledQuestionsIndices.isEmpty() || currentQuestionIndex >= shuffledQuestionsIndices.size()) {
+            questionLabel.setText("Brak pytań do wyświetlenia.");
+            return;
+        }
+
         // Pobieranie odpowiedzi i mieszanie ich kolejności
         List<String> answers = new ArrayList<>();
         answers.add(questions.getAnswers1().get(shuffledQuestionsIndices.get(currentQuestionIndex)));
@@ -161,6 +166,7 @@ public class MyPanel extends JPanel {
 
         currentQuestionIndex++;  // Zwiększenie licznika pytań
     }
+
 
     // Metoda sprawdzająca poprawność odpowiedzi
     private void checkAnswer(Questions questions, String answer, String buttonId) {
