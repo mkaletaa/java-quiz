@@ -18,7 +18,7 @@ public class MyPanel extends JPanel {
 
     private List<Integer> shuffledQuestionsIndices = new ArrayList<>();  // Lista z indeksami pytań, które zostaną losowo przetasowane
     private int currentQuestionIndex;  // Numer aktualnego pytania
-    private Questions currentCategoryQuestions;  // Obiekt zawierający pytania z wybranej kategorii
+    private Category currentCategoryQuestions;  // Obiekt zawierający pytania z wybranej kategorii
 
     public MyPanel(String category) {
         score = 0;  // Inicjalizacja wyniku na 0
@@ -76,7 +76,7 @@ public class MyPanel extends JPanel {
     }
 
     // Obsługa kliknięcia przycisku odpowiedzi
-    private void handleClick(Questions questions, String answer, String buttonId) {
+    private void handleClick(Category questions, String answer, String buttonId) {
         Timer timer = new Timer();  // Tworzenie nowego timera, aby dodać opóźnienie między pytaniami
         timer.schedule(new TimerTask() {
             @Override
@@ -137,12 +137,12 @@ public class MyPanel extends JPanel {
             remove(buttonD);
             remove(chooseCategoryButton);
             remove(endScoreLabel);
-            Category.chooseCat();  // Wywołanie metody do wyboru kategorii (prawdopodobnie z innej klasy)
+            CategoryView.chooseCat();  // Wywołanie metody do wyboru kategorii (prawdopodobnie z innej klasy)
         });
     }
 
 // Metoda do załadowania nowego pytania
-    private void loadNewQuestion(Questions questions) {
+    private void loadNewQuestion(Category questions) {
         if (shuffledQuestionsIndices.isEmpty() || currentQuestionIndex >= shuffledQuestionsIndices.size()) {
             questionLabel.setText("Brak pytań do wyświetlenia.");
             return;
@@ -169,7 +169,7 @@ public class MyPanel extends JPanel {
 
 
     // Metoda sprawdzająca poprawność odpowiedzi
-    private void checkAnswer(Questions questions, String answer, String buttonId) {
+    private void checkAnswer(Category questions, String answer, String buttonId) {
         // Wyłączenie przycisków po wyborze odpowiedzi
         buttonA.setEnabled(false);
         buttonB.setEnabled(false);
